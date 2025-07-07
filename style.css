@@ -1,0 +1,397 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* Pantalla de Inicio */
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: gradientShift 5s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+    0% { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); }
+    100% { background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%); }
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbow 3s ease-in-out infinite;
+}
+
+@keyframes rainbow {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.team-info {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    margin-bottom: 3rem;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.team-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ffd700;
+}
+
+.team-members {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.start-button {
+    padding: 15px 40px;
+    font-size: 1.3rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.start-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+    background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+}
+
+/* Juego Principal */
+.game-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: none;
+}
+
+.game-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="white" opacity="0.3"/><circle cx="12" cy="8" r="0.5" fill="white" opacity="0.5"/><circle cx="18" cy="15" r="0.8" fill="white" opacity="0.4"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
+    animation: twinkle 8s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+.character-container {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+.character {
+    width: 150px;
+    height: 200px;
+    margin: 0 auto 20px;
+    position: relative;
+    transition: all 0.5s ease;
+    background: linear-gradient(180deg, #6c757d 0%, #495057 50%, #343a40 100%);
+    border-radius: 50px 50px 20px 20px;
+}
+
+.character.male {
+    background: linear-gradient(180deg, #8B4513 0%, #654321 50%, #2F4F4F 100%);
+    border-radius: 50px 50px 20px 20px;
+}
+
+.character.female {
+    background: linear-gradient(180deg, #FFB6C1 0%, #FF69B4 50%, #8A2BE2 100%);
+    border-radius: 50px 50px 30px 30px;
+}
+
+.character::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: #FDBCB4;
+    border-radius: 50%;
+    border: 3px solid #333;
+}
+
+.character::after {
+    content: '😊';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+}
+
+.character.speaking {
+    animation: bounce 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+.speech-bubble {
+    position: absolute;
+    top: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #333;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    min-width: 200px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid white;
+}
+
+.speech-bubble.show {
+    opacity: 1;
+    top: -100px;
+}
+
+.controls {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.voice-analysis {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.frequency-display {
+    font-size: 1.2rem;
+    color: #4ecdc4;
+    margin-bottom: 10px;
+}
+
+.gender-indicator {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 25px;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+}
+
+.gender-indicator.male {
+    background: linear-gradient(45deg, #4A90E2, #7B68EE);
+    color: white;
+}
+
+.gender-indicator.female {
+    background: linear-gradient(45deg, #FF69B4, #FF1493);
+    color: white;
+}
+
+.gender-indicator.analyzing {
+    background: linear-gradient(45deg, #FFA500, #FF6347);
+    color: white;
+    animation: pulse 1s infinite;
+}
+
+.record-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background: linear-gradient(45deg, #ff4757, #ff6b6b);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    position: relative;
+}
+
+.record-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,71,87,0.4);
+}
+
+.record-btn.recording {
+    background: linear-gradient(45deg, #ff3838, #ff5757);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 71, 87, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
+}
+
+.status {
+    margin-top: 15px;
+    font-size: 1.1rem;
+    color: #4ecdc4;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* Efectos de sonido visuales */
+.sound-waves {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sound-waves.active {
+    opacity: 1;
+}
+
+.wave {
+    width: 300px;
+    height: 300px;
+    border: 2px solid rgba(78, 205, 196, 0.3);
+    border-radius: 50%;
+    position: absolute;
+    animation: ripple 2s infinite;
+}
+
+.wave:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.wave:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* Visualizador de frecuencia */
+.frequency-visualizer {
+    width: 200px;
+    height: 50px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 25px;
+    margin: 10px auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.frequency-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4ecdc4, #44a08d);
+    border-radius: 25px;
+    transition: width 0.1s ease;
+    width: 0%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .character {
+        width: 120px;
+        height: 160px;
+    }
+    
+    .controls {
+        padding: 15px;
+    }
+}
