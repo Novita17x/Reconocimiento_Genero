@@ -3,71 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echo Voice - Minijuego de Reconocimiento de Voz</title>
+    <title>Eco de Voz - Juego Inteligente</title>
+    <link rel="icon" href="img/logo.png" type="image/png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Pantalla de Inicio -->
-    <div class="start-screen" id="startScreen">
-        <h1 class="title">🎙️ ECHO VOICE</h1>
-        <p class="subtitle">Minijuego de Reconocimiento Automático de Voz por Frecuencia</p>
-        
-        <div class="team-info">
-            <h3 class="team-title">👥 Equipo de Desarrollo</h3>
-            <div class="team-members">
-                <p><strong>Desarrolladores:</strong></p>
-                <p>• [Tu Nombre Aquí] - Programación Principal</p>
-                <p>• [Nombre del Compañero 1] - Análisis de Audio</p>
-                <p>• [Nombre del Compañero 2] - Diseño UI/UX</p>
-                <p>• [Nombre del Compañero 3] - Testing y Documentación</p>
-            </div>
-        </div>
-        
-        <button class="start-button" onclick="startGame()">
-            🎮 COMENZAR JUEGO
-        </button>
-    </div>
-
-    <!-- Juego Principal -->
-    <div class="game-container" id="gameContainer">
-        <div class="game-bg"></div>
-        
-        <button class="back-btn" onclick="goHome()">🏠 Volver</button>
-        
-        <div class="controls">
-            <div class="voice-analysis">
-                <h3>🎵 Análisis de Voz Automático</h3>
-                <div class="frequency-display" id="frequencyDisplay">
-                    Frecuencia: -- Hz
-                </div>
-                <div class="frequency-visualizer">
-                    <div class="frequency-bar" id="frequencyBar"></div>
-                </div>
-                <div class="gender-indicator analyzing" id="genderIndicator">
-                    🔍 Analizando voz...
+    <div class="container">
+        <!-- Pantalla de Inicio -->
+        <div id="startScreen" class="start-screen">
+            <h1 class="title">Eco de Voz</h1>
+            <h2 class="subtitle">Juego Inteligente de Identificación Vocal</h2>
+            
+            <div class="team-info">
+                <h3 class="team-title">Integrantes del Equipo</h3>
+                <div class="team-members">
+                    <p>• Guerrero Torres, Jhefferson - U19206614</p>
+                    <p>• Rodas Carhuas, Richard - U21225422</p>
+                    <p>• Caritas Borja, Mauro - U17105588</p>
                 </div>
             </div>
             
-            <button class="record-btn" id="recordBtn" onclick="toggleRecording()">
-                🎤 Presiona para Hablar
-            </button>
+            <div class="platform-info">
+                <strong>Lenguaje usado:</strong> JavaScript
+            </div>
             
-            <div class="status" id="status">El juego detectará automáticamente tu voz</div>
+            <button class="btn" onclick="startGame()">Iniciar Juego</button>
         </div>
-
-        <div class="character-container">
-            <div class="character" id="character">
-                <div class="speech-bubble" id="speechBubble"></div>
+        <!-- Pantalla de Juego -->
+        <div id="gameScreen" class="game-screen">
+            <h2 class="subtitle">Modo Juego Activo</h2>
+            
+            <div id="character" class="character neutral">
+                <img id="characterImage" src="img/robot.png" alt="Robot">
+            </div>
+            
+            <div id="genderIndicator" class="gender-indicator gender-neutral">
+                Género: No detectado
+            </div>
+            <div class="frequency-display">
+                <div>Frecuencia detectada: <span id="frequencyText">-- Hz</span></div>
+                <div class="frequency-bar">
+                    <div class="frequency-fill" id="frequencyFill"></div>
+                </div>
+            </div>
+            
+            <div id="status" class="status">
+                Presiona "Escuchar" para comenzar
+            </div>
+            
+            <div id="voiceText" class="voice-text">
+                El texto que digas aparecerá aquí...
+            </div>
+            
+            <div class="controls">
+                <button id="listenBtn" class="btn" onclick="startListening()">
+                    Escuchar
+                </button>
+                <button id="repeatBtn" class="btn" onclick="repeatText()" disabled>
+                    Repetir
+                </button>
+                <button class="btn" onclick="goHome()">
+                    Inicio
+                </button>
+            </div>
+            <div class="analysis-info">
+                <strong>Análisis de Voz:</strong> El juego analiza la frecuencia fundamental de tu voz. 
+                Las voces masculinas típicamente están entre 85-180 Hz, mientras que las femeninas entre 165-265 Hz.
+            </div>
+            
+            <div class="footer">
+                <p>Tip: Habla claramente para una mejor detección</p>
             </div>
         </div>
-
-        <div class="sound-waves" id="soundWaves">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
-        </div>
     </div>
-
-    <script src="script.js"></script>
+    
+    <script src="main.js"></script>
 </body>
 </html>
